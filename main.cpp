@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <getopt.h>
+#include "comm/threadpool.h"
 
 using namespace std;
 
@@ -61,6 +62,8 @@ int main(int argc, char** argv)
 	}
 
 	cout << ip << ":" << port << endl;
+
+	threadpool tp = threadpool(2);
 
 	return 0;
 }
