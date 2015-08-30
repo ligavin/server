@@ -6,21 +6,99 @@
  */
 
 #include "threadpool.h"
+#include <iostream>
+#include <stdlib.h>
 
-threadpool::threadpool(int num):numOfThread(num)
+using namespace std;
+
+thread_pool::thread_pool(int num, int queSize):numOfThread(num), maxQueSize(queSize)
 {
 	// TODO Auto-generated constructor stub
+	stop = false;
 
-	for (int i = 0 ; i < numOfThread; ++i)
+	for(int i = 0; i < numOfThread; ++i)
 	{
-		workers.push_back(new worker());
-		workers[i]->run();
+		pthread_t tid;
+
+		int ret = pthread_create(&tid, NULL, (thread_pool::work), this);
+		if (ret != 0)
+			continue;
+
+		pthread_detach(tid);
+
+		pt.push_back(tid);
 	}
 }
 
-threadpool::~threadpool() {
+thread_pool::~thread_pool() {
 	// TODO Auto-generated destructor stub
-
-	for (int i = 0; i < workers.size(); ++i)
-		delete workers[i];
+	stop_run();
 }
+
+
+bool thread_pool::push(task *t)
+{
+	if (NULL == t)
+		return false;
+
+	if (reqQue.size() >= maxQueSize)
+		return false;
+
+	locker.lock();
+	reqQue.push(t);
+	locker.unlock();
+	return true;
+}
+bool thread_pool::pop(task **t)
+{
+	if (NULL == t || reqQue.empty())
+		return false;
+
+	locker.lock();
+
+	*t = reqQue.front();
+	reqQue.pop();
+
+	locker.unlock();
+	return true;
+}
+
+void *thread_pool::work(void *p)
+{
+	thread_pool *p_tp = (thread_pool*)p;
+	while(!p_tp->stop)
+	{
+		task *t;
+
+		cout << "test" << endl;
+
+		if (!p_tp->pop(&t))
+		{
+			continue;
+		}
+
+		t->run();
+		delete t;
+	}
+}
+
+void thread_pool::stop_run()
+{
+	stop = true;
+
+	while(!reqQue.empty())
+	{
+		task *task = reqQue.front();
+		reqQue.pop();
+
+		if (NULL != task)
+			delete task;
+	}
+}
+
+unsigned thread_pool::get_queue_size()
+{
+	return reqQue.size();
+}
+
+

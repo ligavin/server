@@ -21,3 +21,5 @@ CFLAGS = -Wall -g -O3 -pipe -DREENTRANT -DMSG_NEW
 endif
 
 CFLAGS += #-DNDS_WITH_SHM_AND_BOOST_SUPPOR
+
+LIB_COMM = -L/usr/lib/x86_64-redhat-linux5E/lib64/

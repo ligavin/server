@@ -14,6 +14,7 @@
 #include <iostream>
 #include <getopt.h>
 #include "comm/threadpool.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -63,7 +64,9 @@ int main(int argc, char** argv)
 
 	cout << ip << ":" << port << endl;
 
-	threadpool tp = threadpool(2);
+	thread_pool tp = thread_pool(2, 10);
+
+	sleep(10);
 
 	return 0;
 }

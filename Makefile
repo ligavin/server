@@ -1,8 +1,9 @@
-#include ../../Inc.mk
+include ./Inc.mk
 
 CFLAGS  := -g 
 INCLUDE := -I./comm#-I../../comm/ $(WBL_INC) 
-LIBPATH := -L./lib -lcomm #-L ../../lib -luniform_pay -L../../comm/UnionVerifyAPI -lUnionVerifyAPI $(WBL_LIB)
+LIBPATH :=  ${LIB_COMM} -L./lib -lcomm -lpthread
+#-L ../../lib -luniform_pay -L../../comm/UnionVerifyAPI -lUnionVerifyAPI $(WBL_LIB)
 
 BIN_TRANSFER = server
 OBJ_TRANSFER = main.o
