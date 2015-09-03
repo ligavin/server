@@ -1,7 +1,7 @@
 /*
  * taskQueue.cpp
  *
- *  Created on: 2015Äê8ÔÂ30ÈÕ
+ *  Created on: 2015ï¿½ï¿½8ï¿½ï¿½30ï¿½ï¿½
  *      Author: Administrator
  */
 
@@ -22,7 +22,7 @@ task::~task() {
 
 void task::run()
 {
-	cout << "threadid:" << getpid() << endl;
-	cout << "hello" << endl;
-	sleep(1);
+	//cout << "threadid:" << getpid() << endl;
+	//cout << "hello" << endl;
+	//sleep(1);
 }

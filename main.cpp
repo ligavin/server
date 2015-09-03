@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- *  Created on: 2015Äê8ÔÂ29ÈÕ
+ *  Created on: 2015ï¿½ï¿½8ï¿½ï¿½29ï¿½ï¿½
  *      Author: gavinlli
  */
 
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 {
 	//Daemon();
 
-	int opt = 0;
+	/*int opt = 0;
 	char ip[20] = "\0";
 	int port = 0;
 
@@ -62,15 +62,19 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	cout << ip << ":" << port << endl;
+	cout << ip << ":" << port << endl;*/
 
-	thread_pool tp = thread_pool(2, 10);
+	thread_pool tp = thread_pool(2, 1000);
 
-	task *pt = new task;
+	for (int i = 0; i < 1000; ++i)
+	{
+		task *pt = new task;
+		cout << "i:" << i << endl;
 
-	tp.push(pt);
+		tp.push(pt);
+	}
 
-	sleep(10);
+	sleep(200);
 
 	return 0;
 }

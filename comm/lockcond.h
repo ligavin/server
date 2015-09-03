@@ -15,7 +15,7 @@ public:
 	lock_cond();
 	virtual ~lock_cond();
 	void wait(pthread_mutex_t *mutex);
-	void wait_with_time(pthread_mutex_t *mutex, unsigned sec = 1,unsigned us = 0);
+	void wait_with_time(pthread_mutex_t *mutex, unsigned sec = 0,unsigned us = 1000000);
 	void post_msg();
 
 private:

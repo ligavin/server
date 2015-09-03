@@ -10,6 +10,7 @@
 
 #include <pthread.h>
 
+
 class lock_mutex
 {
 public:
@@ -22,5 +23,6 @@ public:
 private:
 	pthread_mutex_t m_mutex;
 };
+
 
 #endif /* LOCKMUTEX_H_ */

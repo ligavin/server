@@ -9,6 +9,7 @@
 
 
 #include "task.h"
+#include "lock.h"
 #include "lockmutex.h"
 #include "lockcond.h"
 #include <vector>
@@ -34,5 +35,17 @@ private:
 	bool stop;
 	std::vector<pthread_t> pt;
 };
+
+class thread_data
+{
+public:
+	thread_pool *m_tp;
+	pthread_t m_tid;
+
+	thread_data(thread_pool *tp, pthread_t tid):m_tp(tp),m_tid(tid)
+	{}
+	virtual ~thread_data(){}
+};
+
 
 #endif /* THREADPOOL_H_ */
