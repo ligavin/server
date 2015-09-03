@@ -10,6 +10,7 @@
 
 #include "task.h"
 #include "lockmutex.h"
+#include "lockcond.h"
 #include <vector>
 #include <queue>
 #include "pthread.h"
@@ -28,7 +29,8 @@ private:
 	int maxQueSize;
 	int numOfThread;
 	std::queue<task*> reqQue;
-	lock_mutex locker;
+	lock_mutex m_locker;
+	lock_cond m_cond;
 	bool stop;
 	std::vector<pthread_t> pt;
 };

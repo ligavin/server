@@ -41,25 +41,41 @@ bool thread_pool::push(task *t)
 	if (NULL == t)
 		return false;
 
+	m_locker.lock();
 	if (reqQue.size() >= maxQueSize)
+	{
+		m_locker.unlock();
 		return false;
-
-	locker.lock();
+	}
 	reqQue.push(t);
-	locker.unlock();
+	m_cond.post_msg();
+	m_locker.unlock();
 	return true;
 }
 bool thread_pool::pop(task **t)
 {
-	if (NULL == t || reqQue.empty())
+	if (NULL == t )
+	{
 		return false;
+	}
 
-	locker.lock();
+	m_locker.lock();
+
+	if (reqQue.empty())
+	{
+		m_cond.wait_with_time((m_locker.get_mutex()));
+
+		if (reqQue.empty())
+		{
+			m_locker.unlock();
+			return false;
+		}
+	}
 
 	*t = reqQue.front();
 	reqQue.pop();
 
-	locker.unlock();
+	m_locker.unlock();
 	return true;
 }
 
@@ -69,8 +85,6 @@ void *thread_pool::work(void *p)
 	while(!p_tp->stop)
 	{
 		task *t;
-
-		cout << "test" << endl;
 
 		if (!p_tp->pop(&t))
 		{

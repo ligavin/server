@@ -33,7 +33,7 @@ const struct option long_opts[] = {
 
 int main(int argc, char** argv)
 {
-	Daemon();
+	//Daemon();
 
 	int opt = 0;
 	char ip[20] = "\0";
@@ -65,6 +65,10 @@ int main(int argc, char** argv)
 	cout << ip << ":" << port << endl;
 
 	thread_pool tp = thread_pool(2, 10);
+
+	task *pt = new task;
+
+	tp.push(pt);
 
 	sleep(10);
 

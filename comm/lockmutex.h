@@ -17,9 +17,10 @@ public:
 	virtual ~lock_mutex();
 	void lock();
 	void unlock();
+	pthread_mutex_t * get_mutex();
 
 private:
-	pthread_mutex_t mutex;
+	pthread_mutex_t m_mutex;
 };
 
 #endif /* LOCKMUTEX_H_ */
