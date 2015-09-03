@@ -17,6 +17,6 @@ $(BIN_TRANSFER):$(OBJ_TRANSFER)
 
 .PHONY:
 clean:
-	rm -rf $(OBJ_TRANSFER) $(OBJ_TRANSFER)
+	rm -rf $(OBJ_TRANSFER) $(BIN_TRANSFER)
 
 
