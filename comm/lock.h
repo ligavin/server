@@ -1,8 +1,8 @@
 /*
  * lock.h
  *
- *  Created on: 2015Äê9ÔÂ3ÈÕ
- *      Author: Administrator
+ *  Created on: 2015å¹´9æœˆ3æ—¥
+ *      Author: gavinlli
  */
 
 #ifndef LOCK_H_

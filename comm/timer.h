@@ -2,7 +2,7 @@
  * timer.h
  *
  *  Created on: 2015年9月3日
- *      Author: Administrator
+ *      Author: gavin
  */
 
 #ifndef TIMER_H_

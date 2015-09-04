@@ -2,7 +2,7 @@
  * timer.cpp
  *
  *  Created on: 2015年9月3日
- *      Author: Administrator
+ *      Author: gavinlli
  */
 
 #include "timer.h"

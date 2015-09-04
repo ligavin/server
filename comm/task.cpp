@@ -1,8 +1,8 @@
 /*
  * taskQueue.cpp
  *
- *  Created on: 2015��8��30��
- *      Author: Administrator
+ *  Created on: 2015年8月30日
+ *      Author: gavinlli
  */
 
 #include "task.h"

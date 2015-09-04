@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- *  Created on: 2015��8��29��
+ *  Created on: 2015年8月29日
  *      Author: gavinlli
  */
 

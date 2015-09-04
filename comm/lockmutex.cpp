@@ -1,8 +1,8 @@
 /*
  * lockmutex.cpp
  *
- *  Created on: 2015Äê8ÔÂ30ÈÕ
- *      Author: Administrator
+ *  Created on: 2015å¹´8æœˆ30æ—¥
+ *      Author: gavinlli
  */
 
 #include "lockmutex.h"
