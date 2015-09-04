@@ -3,7 +3,7 @@ INCLUDE = #-I. -I$(API_MB)/include -I$(MYSQL_PATH)/include/mysql $(SHM_NDS_INC) 
 
 LIB_TOOLS = ../lib/libcomm.a
 
-OBJS_TOOLS = tools.o transfer_server.o  threadpool.o task.o lockmutex.o\
+OBJS_TOOLS = tools.o   task.o lockmutex.o\
 			lockcond.o timer.o
 	#PwdProtected.o ptlogin2_api.o CBalanceCredit.o tools.o \ 
 	#CGameCoinTools_v2.o 

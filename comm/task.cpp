@@ -23,6 +23,6 @@ task::~task() {
 void task::run()
 {
 	//cout << "threadid:" << getpid() << endl;
-	//cout << "hello" << endl;
-	//sleep(1);
+	cout << "hello" << endl;
+	sleep(1);
 }
