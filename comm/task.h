@@ -14,6 +14,9 @@ public:
 	task();
 	virtual ~task();
 	virtual void run();
+
+private:
+	int m_num;
 };
 
 #endif /* TASKQUEUE_H_ */

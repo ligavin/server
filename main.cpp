@@ -7,14 +7,14 @@
 
 
 #include <iostream>
-#include "comm/transfer_server.h"
 #include "comm/tools.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <iostream>
 #include <getopt.h>
-#include "comm/threadpool.h"
+#include "comm/threadpool.hpp"
 #include <stdlib.h>
+#include "task.h"
 
 using namespace std;
 
@@ -30,6 +30,8 @@ const struct option long_opts[] = {
 	{"port", required_argument, NULL, 'p'},
 	{0, 0, 0, 0}
 };
+
+
 
 int main(int argc, char** argv)
 {
@@ -64,11 +66,11 @@ int main(int argc, char** argv)
 
 	cout << ip << ":" << port << endl;*/
 
-	thread_pool tp = thread_pool(2, 1000);
+	thread_pool<task> tp = thread_pool<task>(5, 1000);
 
 	for (int i = 0; i < 1000; ++i)
 	{
-		task *pt = new task;
+		task pt;
 		cout << "i:" << i << endl;
 
 		tp.push(pt);
