@@ -66,15 +66,22 @@ int main(int argc, char** argv)
 
 	cout << ip << ":" << port << endl;*/
 
-	thread_pool<task> tp = thread_pool<task>(5, 1000);
+	thread_pool<task> tp = thread_pool<task>(2, 1000000);
 
-	for (int i = 0; i < 1000; ++i)
+	sleep(15);
+	cout << "begin to push task" << endl;
+	/*for (int i = 0; i < 100000000; ++i)
 	{
 		task pt;
 		cout << "i:" << i << endl;
 
 		tp.push(pt);
-	}
+
+//		if (i % 100000 == 0)
+//			cout << i << endl;
+	}*/
+
+	cout << "push task over" << endl;
 
 	sleep(200);
 
