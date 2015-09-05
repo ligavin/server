@@ -4,10 +4,12 @@
  *  Created on: 2015年8月29日
  *      Author: gavinlli
  */
+
+
 #ifndef THREADPOOL_H_
 #define THREADPOOL_H_
 
-#include "bufferqueue.hpp"
+#include "taskqueue.hpp"
 #include <vector>
 #include <queue>
 #include <pthread.h>
@@ -22,18 +24,20 @@ template<class Ttask>
 class thread_pool
 {
 public:
-	thread_pool(int num, int queSize);
+	static void *work(void *p);
+
+public:
+	thread_pool(int numOfThread, int queSize);
 	virtual ~thread_pool();
 	bool push(const Ttask &t);
 	bool pop(Ttask &t);
-	static void *work(void *p);
 	void stop_run();
 	unsigned get_queue_size();
 
 private:
-	int m_numOfTtaskhread;
+	int m_numOfThread;
 	bool m_stop;
-	buffer_queue<Ttask> m_que;
+	task_queue<Ttask> m_que;
 };
 
 template<class Ttask>
@@ -49,12 +53,12 @@ public:
 };
 
 template<class Ttask>
-thread_pool<Ttask>::thread_pool(int num, int queSize):m_numOfTtaskhread(num), m_que(queSize)
+thread_pool<Ttask>::thread_pool(int numOfThread, int queSize):m_numOfThread(numOfThread), m_que(queSize)
 {
 	// TtaskODO Auto-generated constructor stub
 	m_stop = false;
 
-	for(int i = 0; i < m_numOfTtaskhread; ++i)
+	for(int i = 0; i < m_numOfThread; ++i)
 	{
 		pthread_t tid;
 		thread_data<Ttask> *td = new thread_data<Ttask>(this, tid);
@@ -91,12 +95,20 @@ template<class Ttask>
 void *thread_pool<Ttask>::work(void *p)
 {
 	thread_data<Ttask> *td = (thread_data<Ttask>*)p;
+
+	if (NULL == td)
+		return NULL;
+
 	thread_pool<Ttask> *p_tp = td->m_tp;
+
+	if (NULL == p_tp)
+		return NULL;
+
 	while(!p_tp->m_stop)
 	{
 		Ttask t;
 
-		cout << "tid:" << td->m_tid << endl;
+		//cout << "tid:" << td->m_tid << endl;
 		if (!p_tp->pop(t))
 		{
 			continue;
@@ -105,6 +117,8 @@ void *thread_pool<Ttask>::work(void *p)
 		t.run();
 	}
 	delete td;
+
+	return NULL;
 }
 
 template<class Ttask>

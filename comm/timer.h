@@ -14,7 +14,7 @@ class timer {
 public:
 	timer();
 	void start();
-	double get_time();
+	int get_time();
 	virtual ~timer();
 
 private:
